@@ -45,3 +45,13 @@ Widget buildNavigationBar({required BuildContext context}) {
     },
   );
 }
+
+//Page Loader
+Widget buildPageLoader() {
+  return Container(
+    color: Colors.black.withValues(alpha: 0.3),
+    child: const Center(
+      child: CircularProgressIndicator(backgroundColor: orange, value: null, strokeWidth: 2.0, valueColor: AlwaysStoppedAnimation<Color>(purple)),
+    ),
+  );
+}

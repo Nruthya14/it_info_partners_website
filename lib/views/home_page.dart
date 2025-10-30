@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:it_info_partners/routes/routes_name.dart';
@@ -16,6 +17,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    double font = 0;
+    double subFont = 0;
+    if (!kIsWeb) {
+    } else {
+      if (ScreenUtil().screenWidth > 600) {
+        font = 8.sp;
+        subFont = 5.sp;
+      }
+      if (ScreenUtil().screenWidth <= 600) {
+        font = 10.sp;
+        subFont = 8.sp;
+      }
+    }
+
     return PopScope(
       canPop: false,
       child: SafeArea(
@@ -31,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   isSizeRequired: true,
-                  fontSize: 10.sp,
+                  fontSize: font,
                   margin1: EdgeInsets.only(left: 10.w),
                   isColorChanged: true,
                   textColor: pink,
@@ -43,8 +58,8 @@ class _HomePageState extends State<HomePage> {
                   isMarginRequired: true,
                   margin1: EdgeInsets.only(left: 14.w, right: 14.w),
                   isSizeRequired: true,
-                  fontSize: 5.sp,
-                  maxLines: 3,
+                  fontSize: subFont,
+                  maxLines: 5,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -68,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   isSizeRequired: true,
-                  fontSize: 10.sp,
+                  fontSize: font,
                   margin1: EdgeInsets.only(left: 10.w),
                   isColorChanged: true,
                   textColor: Colors.green,
@@ -81,8 +96,8 @@ class _HomePageState extends State<HomePage> {
                   isMarginRequired: true,
                   margin1: EdgeInsets.only(left: 14.w, right: 14.w),
                   isSizeRequired: true,
-                  fontSize: 5.sp,
-                  maxLines: 3,
+                  fontSize: subFont,
+                  maxLines: 5,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -106,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   isSizeRequired: true,
-                  fontSize: 10.sp,
+                  fontSize: font,
                   margin1: EdgeInsets.only(left: 10.w),
                   isColorChanged: true,
                   textColor: Colors.amber.shade900,
@@ -118,12 +133,12 @@ class _HomePageState extends State<HomePage> {
                   isMarginRequired: true,
                   margin1: EdgeInsets.only(left: 14.w, right: 14.w),
                   isSizeRequired: true,
-                  fontSize: 5.sp,
-                  maxLines: 3,
+                  fontSize: subFont,
+                  maxLines: 5,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, RouteNames.workshops);
+                    Navigator.pushNamed(context, RouteNames.programs);
                   },
                   child: buildText(
                     "Read More...",

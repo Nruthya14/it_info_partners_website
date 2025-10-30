@@ -57,3 +57,59 @@ Widget buildButton(String text, void Function()? onPressed, {bool isDisabled = f
     },
   );
 }
+
+Widget buildWhiteButton(String text, void Function()? onPressed, {bool isDisabled = false, bool isMarginRequired = false}) {
+  return LayoutBuilder(
+    builder: (context, constraints) {
+      double? labelFontSize;
+      double radius = 0;
+      EdgeInsets? padding;
+      EdgeInsets? margin;
+
+      if (!kIsWeb) {
+        if (ScreenUtil().screenWidth < 600) {
+          labelFontSize = 12.sp;
+          padding = EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h);
+          radius = 6.sp;
+          margin = EdgeInsets.only(bottom: 20.h);
+        } else if (ScreenUtil().screenWidth >= 600) {
+          labelFontSize = 8.sp;
+          //padding = EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h);
+          radius = 6;
+          margin = EdgeInsets.only(bottom: 20.h);
+        }
+      } else {
+        if (ScreenUtil().screenWidth < 600) {
+          labelFontSize = 4.sp;
+          padding = EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h);
+          radius = 6;
+        } else if (ScreenUtil().screenWidth >= 600) {
+          labelFontSize = 4.sp;
+          padding = EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h);
+          radius = 6;
+          margin = const EdgeInsets.only(bottom: 0);
+        }
+      }
+      return Container(
+        margin: isMarginRequired ? EdgeInsets.zero : margin,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: whiteSmoke,
+              side: const BorderSide(color: purple),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius)),
+              padding: padding,
+            ),
+            onPressed: isDisabled ? null : onPressed,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: purple, fontSize: labelFontSize, fontWeight: FontWeight.w500),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}

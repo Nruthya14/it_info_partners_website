@@ -4,7 +4,7 @@ import 'package:it_info_partners/views/about_page.dart';
 import 'package:it_info_partners/views/contact_page.dart';
 import 'package:it_info_partners/views/home_page.dart';
 import 'package:it_info_partners/views/services_page.dart';
-import 'package:it_info_partners/views/workshop_page.dart';
+import 'package:it_info_partners/views/programs_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
@@ -15,8 +15,8 @@ class Routes {
         return MaterialPageRoute(builder: (BuildContext context) => const AboutPage());
       case (RouteNames.services):
         return MaterialPageRoute(builder: (BuildContext context) => const ServicesPage());
-      case (RouteNames.workshops):
-        return MaterialPageRoute(builder: (BuildContext context) => const WorkshopPage());
+      case (RouteNames.programs):
+        return MaterialPageRoute(builder: (BuildContext context) => const ProgramsPage());
       case (RouteNames.contactUs):
         return MaterialPageRoute(builder: (BuildContext context) => const ContactPage());
       default:

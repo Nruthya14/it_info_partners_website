@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/custom_widgets/header.dart';
@@ -71,6 +72,25 @@ class _ServicesPageState extends State<ServicesPage> {
 
   @override
   Widget build(BuildContext context) {
+    double height = 0;
+    double width = 0;
+    double font = 0;
+    double subFont = 0;
+    if (!kIsWeb) {
+    } else {
+      if (ScreenUtil().screenWidth > 600) {
+        font = 7.sp;
+        subFont = 4.5.sp;
+        height = MediaQuery.of(context).size.height * 0.5;
+        width = MediaQuery.of(context).size.width * 0.45;
+      }
+      if (ScreenUtil().screenWidth <= 600) {
+        font = 10.sp;
+        subFont = 6.sp;
+        height = MediaQuery.of(context).size.height * 0.25;
+        width = MediaQuery.of(context).size.width * 0.42;
+      }
+    }
     return PopScope(
       canPop: false,
       child: SafeArea(
@@ -92,10 +112,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   isBoldRequired: true,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -103,8 +123,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            fontSize: font,
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
                             isBoldRequired: true,
@@ -115,9 +134,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -126,9 +144,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -142,9 +159,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -152,24 +168,24 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: height,
+                      width: width,
                       child: Stack(children: [VideoPlayer(_controller)]),
                     ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: height,
+                      width: width,
                       //margin: EdgeInsets.only(left: 10.w),
                       child: Stack(children: [VideoPlayer(_controller1)]),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 10.w),
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -177,7 +193,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
+                            fontSize: font,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
@@ -189,9 +205,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w),
+                            //margin1: EdgeInsets.only(right: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -200,9 +216,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -215,9 +231,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -227,10 +243,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -238,8 +254,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            fontSize: font,
+                            //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
                             isBoldRequired: true,
@@ -250,9 +266,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -261,9 +277,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
+                            // margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -275,9 +291,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                            //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -285,24 +301,24 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: height,
+                      width: width,
                       child: Stack(children: [VideoPlayer(_controller2)]),
                     ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: height,
+                      width: width,
                       //margin: EdgeInsets.only(left: 10.w),
                       child: Image.asset('assets/images/services/api_backend.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 10.w),
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -310,7 +326,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
+                            fontSize: font,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
@@ -322,9 +338,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w),
+                            //margin1: EdgeInsets.only(right: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -333,9 +349,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -348,9 +364,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -360,10 +376,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -371,8 +387,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            fontSize: font,
+                            //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
                             isBoldRequired: true,
@@ -383,9 +399,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            // margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -394,9 +410,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
+                            //margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -409,9 +425,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                            // margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -419,24 +435,24 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: height,
+                      width: width,
                       child: Stack(children: [VideoPlayer(_controller3)]),
                     ),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: height,
+                      width: width,
                       //margin: EdgeInsets.only(left: 10.w),
                       child: Image.asset('assets/images/services/additional_service.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 10.w),
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -444,7 +460,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
+                            fontSize: font,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
@@ -456,9 +472,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                            //margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
                             isBoldRequired: true,
@@ -472,9 +488,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -484,10 +500,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -495,8 +511,8 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            fontSize: font,
+                            //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
                             isBoldRequired: true,
@@ -506,9 +522,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w),
+                            //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -524,30 +540,30 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 4.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                            //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.5, width: MediaQuery.of(context).size.width * 0.6, child: Image.asset('assets/images/services/tech_stack.png')),
+                    SizedBox(height: height, width: width, child: Image.asset('assets/images/services/tech_stack.png')),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: height,
+                      width: width,
                       //margin: EdgeInsets.only(left: 10.w),
                       child: Image.asset('assets/images/services/industries.png'),
                     ),
                     Container(
                       margin: EdgeInsets.only(right: 10.w),
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: width,
                       child: Column(
                         children: [
                           buildText(
@@ -555,7 +571,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 8.sp,
+                            fontSize: font,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.indigo.shade600,
@@ -570,9 +586,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -581,7 +597,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 6.sp,
+                            fontSize: font,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
                             textColor: Colors.green.shade600,
@@ -596,9 +612,9 @@ class _ServicesPageState extends State<ServicesPage> {
                             Alignment.centerLeft,
                             isMarginRequired: true,
                             isSizeRequired: true,
-                            fontSize: 5.sp,
+                            fontSize: subFont,
                             maxLines: 5,
-                            margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                            //margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
                             textColor: graphite,
                           ),
@@ -607,7 +623,8 @@ class _ServicesPageState extends State<ServicesPage> {
                     ),
                   ],
                 ),
-                buildFooter()
+                SizedBox(height: 20.h),
+                buildFooter(),
               ],
             ),
           ),

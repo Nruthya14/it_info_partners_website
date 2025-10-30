@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/custom_widgets/header.dart';
@@ -14,6 +15,28 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
+    double sizedHeight = 0;
+    double height = 0;
+    double width = 0;
+    double font = 0;
+    double subFont = 0;
+    if (!kIsWeb) {
+    } else {
+      if (ScreenUtil().screenWidth > 600) {
+        sizedHeight = 100.h;
+        font = 8.sp;
+        subFont = 5.sp;
+        height = MediaQuery.of(context).size.height * 0.5;
+        width = MediaQuery.of(context).size.width * 0.42;
+      }
+      if (ScreenUtil().screenWidth <= 600) {
+        sizedHeight = 50.h;
+        font = 10.sp;
+        subFont = 6.sp;
+        height = MediaQuery.of(context).size.height * 0.25;
+        width = MediaQuery.of(context).size.width * 0.42;
+      }
+    }
     return PopScope(
       canPop: false,
       child: SafeArea(
@@ -28,11 +51,11 @@ class _AboutPageState extends State<AboutPage> {
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   isSizeRequired: true,
-                  fontSize: 10.sp,
+                  fontSize: font,
                   margin1: EdgeInsets.only(left: 10.w, top: 10.h),
                   isColorChanged: true,
                   textColor: pink,
-                  isBoldRequired: true
+                  isBoldRequired: true,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,7 +71,7 @@ class _AboutPageState extends State<AboutPage> {
                         Alignment.centerLeft,
                         isMarginRequired: true,
                         isSizeRequired: true,
-                        fontSize: 5.sp,
+                        fontSize: subFont,
                         margin1: EdgeInsets.only(left: 10.w),
                         isColorChanged: true,
                         textColor: graphite,
@@ -56,14 +79,14 @@ class _AboutPageState extends State<AboutPage> {
                       ),
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      width: MediaQuery.of(context).size.width * 0.42,
+                      height: height,
+                      width: width,
                       margin: EdgeInsets.only(right: 10.w),
                       child: Image.asset("assets/images/about_us.png", fit: BoxFit.fill),
                     ),
                   ],
                 ),
-                SizedBox(height: 100.h),
+                SizedBox(height: sizedHeight),
                 buildFooter(),
               ],
             ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,6 +28,16 @@ class _AnimatedGradientTextState extends State<AnimatedGradientText> with Single
 
   @override
   Widget build(BuildContext context) {
+    double font = 0;
+    if (!kIsWeb) {
+    } else {
+      if (ScreenUtil().screenWidth > 600) {
+        font = 8.sp;
+      }
+      if (ScreenUtil().screenWidth <= 600) {
+        font = 8.sp;
+      }
+    }
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
@@ -44,7 +55,7 @@ class _AnimatedGradientTextState extends State<AnimatedGradientText> with Single
               },
               child: Text(
                 'IT Info Partners',
-                style: TextStyle(fontSize: 8.sp, color: whiteSmoke, fontWeight: FontWeight.bold, letterSpacing: 4),
+                style: TextStyle(fontSize: font, color: whiteSmoke, fontWeight: FontWeight.bold, letterSpacing: 4),
               ),
             );
           },

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,11 +34,28 @@ class _HomeBannerState extends State<HomeBanner> {
           ),
         )
         .toList();
+
+    double imageHeight = 0;
+    if (!kIsWeb) {
+    } else {
+      if (ScreenUtil().screenWidth > 600) {
+        imageHeight = MediaQuery.of(context).size.height * 0.6;
+      }
+      if (ScreenUtil().screenWidth <= 600) {
+        imageHeight = MediaQuery.of(context).size.height * 0.25;
+      }
+      if (ScreenUtil().screenHeight > 600) {
+        imageHeight = MediaQuery.of(context).size.height * 0.25;
+      }
+      if (ScreenUtil().screenHeight <= 200) {
+        imageHeight = MediaQuery.of(context).size.height * 0.8;
+      }
+    }
     return Column(
       children: [
         SizedBox(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.6,
+          height: imageHeight,
           child: CarouselSlider(
             items: imageSliders,
             controller: controller,
