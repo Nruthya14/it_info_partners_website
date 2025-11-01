@@ -35,11 +35,10 @@ class _HomePageState extends State<HomePage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.purple.shade100,
           body: SingleChildScrollView(
             child: Column(
               children: [
-                buildHeader(),
+                Header(),
                 HomeBanner(),
                 buildText(
                   "About Us",
@@ -60,6 +59,8 @@ class _HomePageState extends State<HomePage> {
                   isSizeRequired: true,
                   fontSize: subFont,
                   maxLines: 5,
+                  isColorChanged: true,
+                  textColor: Colors.black54,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -76,7 +77,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: Divider(color: stealGrey),
+                  // child: Divider(color: stealGrey),
+                  //child: buildText("************", Alignment.center),
                 ),
                 buildText(
                   "Our Services",
@@ -98,6 +100,8 @@ class _HomePageState extends State<HomePage> {
                   isSizeRequired: true,
                   fontSize: subFont,
                   maxLines: 5,
+                  textColor: Colors.black54,
+                  isColorChanged: true,
                 ),
                 GestureDetector(
                   onTap: () {
@@ -114,10 +118,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: Divider(color: stealGrey),
+                  // child: Divider(color: stealGrey, indent: 1, endIndent: 4),
+                  //child: buildText("************", Alignment.center),
                 ),
                 buildText(
-                  "Hands-on Workshops",
+                  "Programs",
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   isSizeRequired: true,
@@ -127,15 +132,89 @@ class _HomePageState extends State<HomePage> {
                   textColor: Colors.amber.shade900,
                 ),
                 buildText(
-                  'Our Flutter Hands-On Workshop is designed to help developers and learners build real, functional mobile apps using Flutter and Dart. '
-                  'You’ll explore widgets, layouts, state management, Firebase integration, and deployment — all through guided, practical sessions.',
+                  'At IT Info Partners, our programs are designed to bridge the gap between learning and real-world application. '
+                  'We offer a blend of technical sessions, hands-on workshops, and internship opportunities — each crafted to '
+                  'empower students and professionals with the latest industry skills.',
                   Alignment.centerLeft,
                   isMarginRequired: true,
                   margin1: EdgeInsets.only(left: 14.w, right: 14.w),
                   isSizeRequired: true,
                   fontSize: subFont,
                   maxLines: 5,
+                  textColor: Colors.black54,
+                  isColorChanged: true,
                 ),
+                buildText(
+                  '**Hands-On Workshops**',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: graphite,
+                  isColorChanged: true,
+                ),
+                buildText(
+                  'Dive into real-time app development using Flutter and Dart. '
+                  'From UI design to Firebase integration, our workshops emphasize practical learning and creative problem-solving.',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w, right: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: Colors.black54,
+                  isColorChanged: true,
+                ),
+                buildText(
+                  '**Technical Sessions**',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: graphite,
+                  isColorChanged: true,
+                ),
+                buildText(
+                  'Stay ahead of the curve with expert-led talks on emerging technologies, best practices, and the evolving world of software and design. '
+                  'These sessions aim to inspire innovation and broaden technical perspective.',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w, right: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: Colors.black54,
+                  isColorChanged: true,
+                ),
+                buildText(
+                  '**Internship Programs**',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: graphite,
+                  isColorChanged: true,
+                ),
+                buildText(
+                  'Gain real-world experience by working on live projects under expert mentorship. '
+                  'Our internship opportunities help students and fresh graduates apply their skills, '
+                  'explore professional workflows, and build strong project portfolios.',
+                  Alignment.centerLeft,
+                  isMarginRequired: true,
+                  margin1: EdgeInsets.only(left: 14.w, right: 14.w),
+                  isSizeRequired: true,
+                  fontSize: subFont,
+                  maxLines: 5,
+                  textColor: Colors.black54,
+                  isColorChanged: true,
+                ),
+
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.programs);
@@ -149,10 +228,12 @@ class _HomePageState extends State<HomePage> {
                     textColor: Colors.amber.shade900,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 4.w, right: 4.w),
-                  child: Divider(color: stealGrey),
-                ),
+
+                // Container(
+                //   margin: EdgeInsets.only(left: 4.w, right: 4.w),
+                //   child: Divider(color: stealGrey),
+                // ),
+                SizedBox(height: 20.h),
                 buildFooter(),
               ],
             ),

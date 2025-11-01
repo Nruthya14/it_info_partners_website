@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:it_info_partners/utils/custom_widgets/buttons.dart';
+import 'package:it_info_partners/utils/custom_widgets/testimonials.dart';
+import 'package:it_info_partners/utils/page_utils/hover_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../utils/custom_widgets/header.dart';
 import '../utils/custom_widgets/text_widgets.dart';
 import '../utils/widget_utils/app_colours.dart';
@@ -18,26 +21,35 @@ class _ProgramsPageState extends State<ProgramsPage> {
   Widget build(BuildContext context) {
     double font = 0;
     double subFont = 0;
+    double width = 0;
+    double height = 0;
     if (!kIsWeb) {
     } else {
-      if (ScreenUtil().screenWidth > 600) {
+      if (ScreenUtil().screenWidth > 1000) {
         font = 7.sp;
         subFont = 4.5.sp;
-      }
-      if (ScreenUtil().screenWidth <= 600) {
+        width = MediaQuery.of(context).size.width * 0.07;
+        height = MediaQuery.of(context).size.height * 0.44;
+      } else if (ScreenUtil().screenWidth > 650) {
+        font = 8.sp;
+        subFont = 4.sp;
+        width = MediaQuery.of(context).size.width * 0.1;
+        height = MediaQuery.of(context).size.height * 0.34;
+      } else {
         font = 10.sp;
-        subFont = 6.sp;
+        subFont = 6.5.sp;
+        width = MediaQuery.of(context).size.width * 0.2;
+        height = MediaQuery.of(context).size.height * 0.3;
       }
     }
     return PopScope(
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.amber.shade50,
           body: SingleChildScrollView(
             child: Column(
               children: [
-                buildHeader(),
+                Header(),
                 buildText(
                   "PROGRAMS",
                   Alignment.center,
@@ -49,333 +61,158 @@ class _ProgramsPageState extends State<ProgramsPage> {
                   textColor: Colors.amber.shade900,
                   isBoldRequired: true,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  spacing: 20.w,
+                  runSpacing: 30.h,
+                  //mainAxisAlignment: mainAxisAlignment,
                   children: [
-                    Card(
-                      elevation: 10,
-                      color: Colors.orange.shade100,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          buildText(
-                            'Workshops',
-                            Alignment.center,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.all(4.w),
-                            isBoldRequired: true,
-                            isColorChanged: true,
-                            textColor: purple,
-                            isSizeRequired: true,
-                            fontSize: font,
+                    HoverCard(
+                      width: width,
+                      height: height,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/images/png/bg1.png'), fit: BoxFit.cover, colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcATop)),
+                          border: Border.all(width: 0.1),
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              buildText(
+                                'Workshops',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.all(2.w),
+                                isBoldRequired: true,
+                                isColorChanged: true,
+                                textColor: purple,
+                                isSizeRequired: true,
+                                fontSize: font,
+                              ),
+                              buildText(
+                                '• Individual\n'
+                                '• College / Institutional\n'
+                                '• Corporate / Tech Professional\n',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.only(left: 4.w, right: 4.w),
+                                isColorChanged: true,
+                                textColor: graphite,
+                                isSizeRequired: true,
+                                fontSize: subFont,
+                                isTextAligned: true,
+                                textAlign: TextAlign.left,
+                              ),
+                              buildButton("Download Brochure", () {
+                                launchUrl(Uri.parse("https://drive.google.com/uc?export=download&id=1bl-1RolTaxneJ4F9yAGmZAsrR6shbFxo"));
+                              }),
+                              SizedBox(height: 12.h),
+                            ],
                           ),
-                          buildText(
-                            '• Individual\n'
-                            '• College / Institutional\n'
-                            '• Corporate / Tech Professional\n',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-                            isColorChanged: true,
-                            textColor: pink,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                          ),
-                          buildButton("Download Brochure", () {}),
-                          SizedBox(height: 12.h),
-                        ],
+                        ),
                       ),
                     ),
-                    Card(
-                      elevation: 10,
-                      color: Colors.orange.shade100,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          buildText(
-                            'Tech Connect',
-                            Alignment.center,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.all(4.w),
-                            isBoldRequired: true,
-                            isColorChanged: true,
-                            textColor: purple,
-                            isSizeRequired: true,
-                            fontSize: font,
+                    HoverCard(
+                      width: width,
+                      height: height,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/images/png/bg1.png'), fit: BoxFit.cover, colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcATop)),
+                          border: Border.all(width: 0.1),
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              buildText(
+                                'Tech Connect',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.all(2.w),
+                                isBoldRequired: true,
+                                isColorChanged: true,
+                                textColor: purple,
+                                isSizeRequired: true,
+                                fontSize: font,
+                              ),
+                              buildText(
+                                'Interactive sessions that bridge\nstudents and industry experts\nthrough real-world tech insights.\n',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.only(left: 4.w, right: 4.w),
+                                isColorChanged: true,
+                                textColor: graphite,
+                                isSizeRequired: true,
+                                fontSize: subFont,
+                                isTextAligned: true,
+                                textAlign: TextAlign.left,
+                              ),
+                              buildButton("Download Brochure", () {
+                                launchUrl(Uri.parse("https://drive.google.com/uc?export=download&id=164YDad9L_gYRaY-RVm9n_E3EholnrHVw"));
+                              }),
+                              SizedBox(height: 12.h),
+                            ],
                           ),
-                          buildText(
-                            'Interactive sessions that bridge\nstudents and industry experts\nthrough real-world tech insights.\n',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-                            isColorChanged: true,
-                            textColor: pink,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                          ),
-                          buildButton("Download Brochure", () {}),
-                          SizedBox(height: 12.h),
-                        ],
+                        ),
                       ),
                     ),
-                    Card(
-                      elevation: 10,
-                      color: Colors.orange.shade100,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          buildText(
-                            'Internships',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.all(4.w),
-                            isBoldRequired: true,
-                            isColorChanged: true,
-                            textColor: purple,
-                            isSizeRequired: true,
-                            fontSize: font,
+                    HoverCard(
+                      width: width,
+                      height: height,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: AssetImage('assets/images/png/bg1.png'), fit: BoxFit.cover, colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcATop)),
+                          border: Border.all(width: 0.1),
+                          borderRadius: BorderRadius.circular(16.r),
+                        ),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              buildText(
+                                'Internships',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.all(2.w),
+                                isBoldRequired: true,
+                                isColorChanged: true,
+                                textColor: purple,
+                                isSizeRequired: true,
+                                fontSize: font,
+                              ),
+                              buildText(
+                                'Gain industry exposure and\npractical skills through\nguided internship opportunities.\n',
+                                Alignment.center,
+                                isMarginRequired: true,
+                                margin1: EdgeInsets.only(left: 4.w, right: 4.w),
+                                isColorChanged: true,
+                                textColor: graphite,
+                                isSizeRequired: true,
+                                fontSize: subFont,
+                                isTextAligned: true,
+                                textAlign: TextAlign.left,
+                              ),
+                              buildButton("Download Brochure", () {
+                                launchUrl(Uri.parse("https://drive.google.com/uc?export=download&id=1VjLRxGE_3Et9_9cc3wM2-oDNVdn6ZKrp"));
+                              }),
+                              SizedBox(height: 12.h),
+                            ],
                           ),
-                          buildText(
-                            'Gain industry exposure and\npractical skills through\nguided internship opportunities.\n',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-                            isColorChanged: true,
-                            textColor: pink,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                          ),
-                          buildButton("Download Brochure", () {}),
-                          SizedBox(height: 12.h),
-                        ],
+                        ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 20.h),
+                buildTestimonials(),
+                buildFeedback(),
                 buildFooter(),
               ],
             ),
           ),
-
-          // body: SingleChildScrollView(
-          //   child: Column(
-          //     children: [
-          //       buildHeader(),
-          //       buildText(
-          //         "HANDS-ON WORKSHOPS",
-          //         Alignment.center,
-          //         isMarginRequired: true,
-          //         isSizeRequired: true,
-          //         fontSize: 10.sp,
-          //         margin1: EdgeInsets.only(left: 10.w, top: 10.h),
-          //         isColorChanged: true,
-          //         textColor: Colors.amber.shade900,
-          //         isBoldRequired: true,
-          //       ),
-          //       buildText(
-          //         "Empowering developers and students to build real Flutter apps — hands-on, project-driven, and industry-ready.",
-          //         Alignment.center,
-          //         isMarginRequired: true,
-          //         isSizeRequired: true,
-          //         fontSize: subFont,
-          //         //margin1: EdgeInsets.only(left: 10.w, top: 10.h),
-          //         isColorChanged: true,
-          //         textColor: Colors.greenAccent.shade700,
-          //       ),
-          //       buildText(
-          //         "About the Workshop",
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w, top: 10.h),
-          //         isSizeRequired: true,
-          //         fontSize: font,
-          //         isColorChanged: true,
-          //         textColor: Colors.red.shade700,
-          //       ),
-          //       buildText(
-          //         "The Flutter Hands-On Workshop by IT Info Partners is a complete learning experience crafted for students, IT professionals, and tech enthusiasts. We focus on building functional, real-world apps using Flutter & Dart through practical sessions and project-based learning.\n\nNo theory overload — just pure, interactive coding sessions that let you learn by building.",
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w, right: 50.h),
-          //         isSizeRequired: true,
-          //         fontSize: subFont,
-          //         maxLines: 3,
-          //       ),
-          //       buildText(
-          //         "Workshop Categories",
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w),
-          //         isSizeRequired: true,
-          //         fontSize: font,
-          //         isColorChanged: true,
-          //         textColor: Colors.red.shade700,
-          //       ),
-          //       Row(
-          //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //         children: [
-          //           Card(
-          //             elevation: 10,
-          //             color: Colors.orange.shade100,
-          //             child: Column(
-          //               crossAxisAlignment: CrossAxisAlignment.center,
-          //               children: [
-          //                 buildText(
-          //                   'Individual Workshop',
-          //                   Alignment.center,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.all(4.w),
-          //                   isBoldRequired: true,
-          //                   isColorChanged: true,
-          //                   textColor: purple,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //                 buildText(
-          //                   '• Beginner-friendly & guided coding\n'
-          //                   '• Mini project and personal mentoring\n'
-          //                   '• Certificate of completion\n'
-          //                   '• Small group sessions',
-          //                   Alignment.centerLeft,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-          //                   isColorChanged: true,
-          //                   textColor: pink,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           Card(
-          //             elevation: 10,
-          //             color: Colors.orange.shade100,
-          //             child: Column(
-          //               crossAxisAlignment: CrossAxisAlignment.start,
-          //               children: [
-          //                 buildText(
-          //                   'College / Institutional Workshop',
-          //                   Alignment.centerLeft,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.all(4.w),
-          //                   isBoldRequired: true,
-          //                   isColorChanged: true,
-          //                   textColor: purple,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //                 buildText(
-          //                   '• 1–2 day on-site / online bootcamps\n'
-          //                   '• Tailored syllabus for student level\n'
-          //                   '• Certification for participants\n'
-          //                   '• Institutional MoU available',
-          //                   Alignment.centerLeft,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-          //                   isColorChanged: true,
-          //                   textColor: pink,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           Card(
-          //             elevation: 10,
-          //             color: Colors.orange.shade100,
-          //             child: Column(
-          //               crossAxisAlignment: CrossAxisAlignment.start,
-          //               children: [
-          //                 buildText(
-          //                   'Corporate / Tech Professional Workshop',
-          //                   Alignment.centerLeft,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.all(4.w),
-          //                   isBoldRequired: true,
-          //                   isColorChanged: true,
-          //                   textColor: purple,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //                 buildText(
-          //                   '• Advanced Flutter & Firebase integration\n'
-          //                   '• App architecture & performance focus\n'
-          //                   '• Team-based project sessions\n'
-          //                   '• Post-workshop technical support',
-          //                   Alignment.centerLeft,
-          //                   isMarginRequired: true,
-          //                   margin1: EdgeInsets.only(left: 4.w, right: 4.w),
-          //                   isColorChanged: true,
-          //                   textColor: pink,
-          //                   isSizeRequired: true,
-          //                   fontSize: subFont,
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       buildText(
-          //         "What You'll Learn",
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w, top: 10.h),
-          //         isSizeRequired: true,
-          //         fontSize: font,
-          //         isColorChanged: true,
-          //         textColor: Colors.red.shade700,
-          //       ),
-          //       buildText(
-          //         '• Understand Flutter’s architecture and app-building process\n'
-          //         '• Learn UI design, interactivity, and navigation\n'
-          //         '• State management (Provider / Bloc / Riverpod)\n'
-          //         '• Firebase integration – Authentication & Firestore\n'
-          //         '• Gain industry insights and a career roadmap in Flutter development\n',
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w),
-          //         isColorChanged: true,
-          //         // textColor: pink,
-          //         isSizeRequired: true,
-          //         fontSize: subFont,
-          //       ),
-          //
-          //       buildText(
-          //         "Want to Collaborate?",
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w),
-          //         isSizeRequired: true,
-          //         fontSize: font,
-          //         isColorChanged: true,
-          //         textColor: Colors.red.shade700,
-          //       ),
-          //       buildText(
-          //         '- For Colleges & Institutions - Host a Flutter Workshop in your college or tech fest. We conduct full-fledged sessions with coding guidance, certificates, and project-based learning.\n',
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w, right: 20.w),
-          //         isColorChanged: true,
-          //         // textColor: pink,
-          //         isSizeRequired: true,
-          //         maxLines: 3,
-          //         fontSize: subFont,
-          //       ),
-          //       buildText(
-          //         '- For Individuals & Professionals - Join our upcoming batches and master Flutter development through practical implementation and mentorship.',
-          //         Alignment.centerLeft,
-          //         isMarginRequired: true,
-          //         margin1: EdgeInsets.only(left: 10.w, bottom: 20.h),
-          //         isColorChanged: true,
-          //         // textColor: pink,
-          //         isSizeRequired: true,
-          //         fontSize: subFont,
-          //       ),
-          //       buildFooter(),
-          //     ],
-          //   ),
-          // ),
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:it_info_partners/utils/widget_utils/app_colours.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget buildText(
   String text,
@@ -12,6 +13,7 @@ Widget buildText(
   isSizeRequired = false,
   isLoginPage = false,
   isFontStyleRequired = false,
+  isTextAligned = false,
   FontStyle? fontStyle,
   double? fontSize,
   TextAlign? textAlign,
@@ -47,14 +49,20 @@ Widget buildText(
           text,
           softWrap: true,
           maxLines: maxLines,
-          textAlign: TextAlign.justify,
-          style: TextStyle(
+          textAlign: isTextAligned ? textAlign : TextAlign.justify,
+          style: GoogleFonts.acme(
             color: isColorChanged ? textColor : graphite,
             fontSize: isSizeRequired ? fontSize : labelFontSize,
             fontWeight: isBoldRequired ? FontWeight.w600 : FontWeight.w400,
             fontStyle: isFontStyleRequired ? fontStyle : FontStyle.normal,
-            overflow: TextOverflow.ellipsis,
           ),
+          // style: TextStyle(
+          //   color: isColorChanged ? textColor : graphite,
+          //   fontSize: isSizeRequired ? fontSize : labelFontSize,
+          //   fontWeight: isBoldRequired ? FontWeight.w600 : FontWeight.w400,
+          //   fontStyle: isFontStyleRequired ? fontStyle : FontStyle.normal,
+          //   overflow: TextOverflow.ellipsis,
+          // ),
         ),
       );
     },

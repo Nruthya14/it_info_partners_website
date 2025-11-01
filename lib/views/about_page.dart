@@ -41,18 +41,18 @@ class _AboutPageState extends State<AboutPage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.pink.shade50,
+          //backgroundColor: Colors.pink.shade50,
           body: SingleChildScrollView(
             child: Column(
               children: [
-                buildHeader(),
+                Header(),
                 buildText(
                   "ABOUT US",
-                  Alignment.centerLeft,
+                  Alignment.center,
                   isMarginRequired: true,
                   isSizeRequired: true,
                   fontSize: font,
-                  margin1: EdgeInsets.only(left: 10.w, top: 10.h),
+                  margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
                   isColorChanged: true,
                   textColor: pink,
                   isBoldRequired: true,
@@ -74,7 +74,7 @@ class _AboutPageState extends State<AboutPage> {
                         fontSize: subFont,
                         margin1: EdgeInsets.only(left: 10.w),
                         isColorChanged: true,
-                        textColor: graphite,
+                        textColor: Colors.black54,
                         maxLines: 14,
                       ),
                     ),

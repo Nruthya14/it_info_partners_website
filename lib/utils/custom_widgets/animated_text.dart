@@ -31,11 +31,12 @@ class _AnimatedGradientTextState extends State<AnimatedGradientText> with Single
     double font = 0;
     if (!kIsWeb) {
     } else {
-      if (ScreenUtil().screenWidth > 600) {
-        font = 8.sp;
-      }
-      if (ScreenUtil().screenWidth <= 600) {
-        font = 8.sp;
+      if (ScreenUtil().screenWidth > 1000) {
+        font = 6.5.sp;
+      } else if (ScreenUtil().screenWidth > 650) {
+        font = 4.5.sp;
+      } else {
+        font = 6.sp;
       }
     }
     return Scaffold(

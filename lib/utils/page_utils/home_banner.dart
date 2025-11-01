@@ -38,19 +38,30 @@ class _HomeBannerState extends State<HomeBanner> {
     double imageHeight = 0;
     if (!kIsWeb) {
     } else {
-      if (ScreenUtil().screenWidth > 600) {
+      if (ScreenUtil().screenWidth > 1000) {
         imageHeight = MediaQuery.of(context).size.height * 0.6;
-      }
-      if (ScreenUtil().screenWidth <= 600) {
+      } else if (ScreenUtil().screenWidth > 650) {
+        imageHeight = MediaQuery.of(context).size.height * 0.4;
+      } else {
         imageHeight = MediaQuery.of(context).size.height * 0.25;
-      }
-      if (ScreenUtil().screenHeight > 600) {
-        imageHeight = MediaQuery.of(context).size.height * 0.25;
-      }
-      if (ScreenUtil().screenHeight <= 200) {
-        imageHeight = MediaQuery.of(context).size.height * 0.8;
       }
     }
+
+    // if (!kIsWeb) {
+    // } else {
+    //   // if (ScreenUtil().screenWidth > 600) {
+    //   //   imageHeight = MediaQuery.of(context).size.height * 0.6;
+    //   // }
+    //   // if (ScreenUtil().screenWidth <= 600) {
+    //   //   imageHeight = MediaQuery.of(context).size.height * 0.25;
+    //   // }
+    //   // if (ScreenUtil().screenHeight > 600) {
+    //   //   imageHeight = MediaQuery.of(context).size.height * 0.25;
+    //   // }
+    //   // if (ScreenUtil().screenHeight <= 200) {
+    //   //   imageHeight = MediaQuery.of(context).size.height * 0.8;
+    //   // }
+    // }
     return Column(
       children: [
         SizedBox(

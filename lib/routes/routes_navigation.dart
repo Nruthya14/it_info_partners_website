@@ -8,23 +8,27 @@ import 'package:it_info_partners/views/programs_page.dart';
 
 class Routes {
   static Route<dynamic> generateRoutes(RouteSettings settings) {
+    Widget page;
+
     switch (settings.name) {
-      case (RouteNames.homePage):
-        return MaterialPageRoute(builder: (BuildContext context) => const HomePage());
-      case (RouteNames.aboutUs):
-        return MaterialPageRoute(builder: (BuildContext context) => const AboutPage());
-      case (RouteNames.services):
-        return MaterialPageRoute(builder: (BuildContext context) => const ServicesPage());
-      case (RouteNames.programs):
-        return MaterialPageRoute(builder: (BuildContext context) => const ProgramsPage());
-      case (RouteNames.contactUs):
-        return MaterialPageRoute(builder: (BuildContext context) => const ContactPage());
+      case RouteNames.homePage:
+        page = const HomePage();
+        break;
+      case RouteNames.aboutUs:
+        page = const AboutPage();
+        break;
+      case RouteNames.services:
+        page = const ServicesPage();
+        break;
+      case RouteNames.programs:
+        page = const ProgramsPage();
+        break;
+      case RouteNames.contactUs:
+        page = const ContactPage();
+        break;
       default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(child: Column(children: [Text("No route is configured")])),
-          ),
-        );
+        page = Scaffold(body: Center(child: Text("No route configured for ${settings.name}")));
     }
+    return PageRouteBuilder(settings: settings, pageBuilder: (_, _, _) => page, transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero);
   }
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/custom_widgets/header.dart';
 import '../utils/custom_widgets/text_widgets.dart';
-import '../utils/widget_utils/app_colours.dart';
 import 'package:video_player/video_player.dart';
 
 class ServicesPage extends StatefulWidget {
@@ -20,40 +19,49 @@ class _ServicesPageState extends State<ServicesPage> {
   late VideoPlayerController _controller3;
   bool startedPlaying = false;
 
-  void getVideos() {
-    //Video - 1
-    _controller = VideoPlayerController.asset("assets/videos/mobile_dev.mp4");
-    _controller.addListener(() {
-      setState(() {});
+  void safeUpdate() {
+    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) setState(() {});
     });
-    _controller.setLooping(true);
-    _controller.initialize().then((_) => setState(() {}));
-    _controller.play();
-    //Video - 2
-    _controller1 = VideoPlayerController.asset("assets/videos/web_dev.mp4");
-    _controller1.addListener(() {
-      setState(() {});
-    });
-    _controller1.setLooping(true);
-    _controller1.initialize().then((_) => setState(() {}));
-    _controller1.play();
+  }
 
-    //Video - 3
-    _controller2 = VideoPlayerController.asset("assets/videos/ui_ux.mp4");
-    _controller2.addListener(() {
-      setState(() {});
-    });
-    _controller2.setLooping(true);
-    _controller2.initialize().then((_) => setState(() {}));
-    _controller2.play();
-    //Video - 4
-    _controller3 = VideoPlayerController.asset("assets/videos/support.mp4");
-    _controller3.addListener(() {
-      setState(() {});
-    });
-    _controller3.setLooping(true);
-    _controller3.initialize().then((_) => setState(() {}));
-    _controller3.play();
+  void getVideos() {
+    // Video - 1
+    _controller = VideoPlayerController.asset("assets/videos/mobile_dev.mp4")
+      ..addListener(safeUpdate)
+      ..setLooping(true)
+      ..initialize().then((_) {
+        if (mounted) setState(() {});
+        _controller.play();
+      });
+
+    // Video - 2
+    _controller1 = VideoPlayerController.asset("assets/videos/web_dev.mp4")
+      ..addListener(safeUpdate)
+      ..setLooping(true)
+      ..initialize().then((_) {
+        if (mounted) setState(() {});
+        _controller1.play();
+      });
+
+    // Video - 3
+    _controller2 = VideoPlayerController.asset("assets/videos/ui_ux.mp4")
+      ..addListener(safeUpdate)
+      ..setLooping(true)
+      ..initialize().then((_) {
+        if (mounted) setState(() {});
+        _controller2.play();
+      });
+
+    // Video - 4
+    _controller3 = VideoPlayerController.asset("assets/videos/support.mp4")
+      ..addListener(safeUpdate)
+      ..setLooping(true)
+      ..initialize().then((_) {
+        if (mounted) setState(() {});
+        _controller3.play();
+      });
   }
 
   @override
@@ -64,10 +72,20 @@ class _ServicesPageState extends State<ServicesPage> {
 
   @override
   void dispose() {
-    _controller.dispose();
-    _controller1.dispose();
-    _controller2.dispose();
+    for (final c in [_controller, _controller1, _controller2, _controller3]) {
+      c.removeListener(safeUpdate);
+      c.dispose();
+    }
     super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    _controller.pause();
+    _controller1.pause();
+    _controller2.pause();
+    _controller3.pause();
+    super.deactivate();
   }
 
   @override
@@ -76,10 +94,11 @@ class _ServicesPageState extends State<ServicesPage> {
     double width = 0;
     double font = 0;
     double subFont = 0;
+    Color color = Colors.black54;
     if (!kIsWeb) {
     } else {
       if (ScreenUtil().screenWidth > 600) {
-        font = 7.sp;
+        font = 6.5.sp;
         subFont = 4.5.sp;
         height = MediaQuery.of(context).size.height * 0.5;
         width = MediaQuery.of(context).size.width * 0.45;
@@ -95,11 +114,11 @@ class _ServicesPageState extends State<ServicesPage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.green.shade100,
+          // backgroundColor: Colors.green.shade100,
           body: SingleChildScrollView(
             child: Column(
               children: [
-                buildHeader(),
+                Header(),
                 buildText(
                   "SERVICES",
                   Alignment.center,
@@ -108,7 +127,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   fontSize: 10.sp,
                   margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 20.h),
                   isColorChanged: true,
-                  textColor: Colors.green.shade900,
+                  textColor: Colors.green.shade800,
                   isBoldRequired: true,
                 ),
                 Row(
@@ -137,7 +156,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             fontSize: subFont,
                             maxLines: 5,
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "What we deliver",
@@ -162,7 +181,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             fontSize: subFont,
                             maxLines: 5,
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -209,7 +228,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(right: 10.w),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "We build",
@@ -235,7 +254,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -270,7 +289,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "Our design process includes",
@@ -295,7 +314,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -342,7 +361,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(right: 10.w),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "Tech Expertise",
@@ -368,7 +387,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -403,7 +422,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "Includes",
@@ -429,7 +448,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -492,7 +511,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -526,7 +545,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(left: 10.w),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             " - Flutter\n"
@@ -544,7 +563,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),
@@ -590,7 +609,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                           buildText(
                             "Why Choose IT Info Partners",
@@ -616,7 +635,7 @@ class _ServicesPageState extends State<ServicesPage> {
                             maxLines: 5,
                             //margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
                             isColorChanged: true,
-                            textColor: graphite,
+                            textColor: color,
                           ),
                         ],
                       ),

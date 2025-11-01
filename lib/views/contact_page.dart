@@ -51,7 +51,7 @@ class _ContactPageState extends State<ContactPage> {
               SingleChildScrollView(
                 child: Column(
                   children: [
-                    buildHeader(),
+                    Header(),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: ScreenUtil().scaleHeight > 600 ? MediaQuery.of(context).size.height * 0.1 : MediaQuery.of(context).size.height * 0.75,
@@ -71,7 +71,7 @@ class _ContactPageState extends State<ContactPage> {
                             padding: ScreenUtil().screenWidth < 600 ? EdgeInsets.only(left: 8.w) : EdgeInsets.only(left: 15.w),
                             alignment: Alignment.centerLeft,
                             width: MediaQuery.of(context).size.width * 0.6,
-                            height: MediaQuery.of(context).size.height * 0.64,
+                            // height: MediaQuery.of(context).size.height * 0.64,
                             child: SingleChildScrollView(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
