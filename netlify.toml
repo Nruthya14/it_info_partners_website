@@ -1,0 +1,10 @@
+[build]
+publish = "build/web"
+command = "flutter build web"
+
+[build.environment]
+FLUTTER_VERSION = "3.35.7"   # replace with your actual Flutter version
+PATH = "$PATH:/opt/buildhome/flutter/bin"
+
+[[plugins]]
+package = "netlify-plugin-flutter"
