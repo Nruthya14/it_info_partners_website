@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import '../utils/custom_widgets/header.dart';
 import '../utils/custom_widgets/text_widgets.dart';
 import 'package:video_player/video_player.dart';
@@ -90,562 +90,640 @@ class _ServicesPageState extends State<ServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    double height = 0;
-    double width = 0;
     double font = 0;
     double subFont = 0;
     Color color = Colors.black54;
-    if (!kIsWeb) {
-    } else {
-      if (ScreenUtil().screenWidth > 600) {
-        font = 6.5.sp;
-        subFont = 4.5.sp;
-        height = MediaQuery.of(context).size.height * 0.5;
-        width = MediaQuery.of(context).size.width * 0.45;
-      }
-      if (ScreenUtil().screenWidth <= 600) {
-        font = 10.sp;
-        subFont = 6.sp;
-        height = MediaQuery.of(context).size.height * 0.25;
-        width = MediaQuery.of(context).size.width * 0.42;
-      }
-    }
+
     return PopScope(
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          // backgroundColor: Colors.green.shade100,
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Header(),
-                buildText(
-                  "SERVICES",
-                  Alignment.center,
-                  isMarginRequired: true,
-                  isSizeRequired: true,
-                  fontSize: 10.sp,
-                  margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 20.h),
-                  isColorChanged: true,
-                  textColor: Colors.green.shade800,
-                  isBoldRequired: true,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          body: ResponsiveBuilder(
+            builder: (context, sp) {
+              if (sp.deviceScreenType == DeviceScreenType.desktop) {
+                if (ScreenUtil().screenWidth > 800 && ScreenUtil().screenWidth <= 1000) {
+                  font = 6.sp;
+                  subFont = 4.sp;
+                }
+                if (ScreenUtil().screenWidth > 1000 && ScreenUtil().screenWidth <= 1200) {
+                  font = 7.sp;
+                  subFont = 4.5.sp;
+                }
+                if (ScreenUtil().screenWidth > 1200) {
+                  font = 6.sp;
+                  subFont = 4.sp;
+                }
+              }
+              if (sp.deviceScreenType == DeviceScreenType.tablet) {
+                if (ScreenUtil().screenWidth > 600 && ScreenUtil().screenWidth <= 800) {
+                  font = 7.sp;
+                  subFont = 5.sp;
+                }
+                if (ScreenUtil().screenWidth > 800 && ScreenUtil().screenWidth <= 1000) {
+                  font = 7.sp;
+                  subFont = 5.sp;
+                }
+              }
+              if (sp.deviceScreenType == DeviceScreenType.mobile) {
+                if (ScreenUtil().screenWidth > 500 && ScreenUtil().screenWidth <= 600) {
+                  font = 9.sp;
+                  subFont = 6.5.sp;
+                }
+                if (ScreenUtil().screenWidth > 400 && ScreenUtil().screenWidth <= 500) {
+                  font = 9.sp;
+                  subFont = 6.sp;
+                }
+              }
+              return SingleChildScrollView(
+                child: Column(
                   children: [
-                    SizedBox(
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Mobile Application Development",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            "Bring your ideas to life with beautiful, high-performance mobile apps. "
-                            "We design and develop Android and iOS applications using Flutter — ensuring consistent UI, smooth animations, and responsive performance.",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                          buildText(
-                            "What we deliver",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            maxLines: 5,
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Flutter Android & iOS apps\n"
-                            " - Firebase & REST API integration\n"
-                            " - Real-time data handling\n"
-                            " - Push notifications & authentication\n"
-                            " - App Store & Play Store deployment\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
+                    Header(),
+                    buildText(
+                      "SERVICES",
+                      Alignment.center,
+                      isMarginRequired: true,
+                      isSizeRequired: true,
+                      fontSize: 10.sp,
+                      margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 20.h),
+                      isColorChanged: true,
+                      textColor: Colors.green.shade800,
+                      isBoldRequired: true,
                     ),
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      child: Stack(children: [VideoPlayer(_controller)]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Mobile Application Development",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  "Bring your ideas to life with beautiful, high-performance mobile apps. "
+                                  "We design and develop Android and iOS applications using Flutter — ensuring consistent UI, smooth animations, and responsive performance.",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "What we deliver",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  maxLines: 5,
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Flutter Android & iOS apps\n"
+                                  " - Firebase & REST API integration\n"
+                                  " - Real-time data handling\n"
+                                  " - Push notifications & authentication\n"
+                                  " - App Store & Play Store deployment\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10.r), child: VideoPlayer(_controller)),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      //margin: EdgeInsets.only(left: 10.w),
-                      child: Stack(children: [VideoPlayer(_controller1)]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: VideoPlayer(_controller1)),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Website & Web Application Development",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  "Deliver powerful web experiences that work everywhere. "
+                                  "We create responsive web apps and business dashboards using Flutter Web — combining the performance of native with the flexibility of the web.",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(right: 10.w),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "We build",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Business management dashboards\n"
+                                  " - Progressive Web Apps (PWAs)\n"
+                                  " - Admin panels & portals\n"
+                                  " - Web versions of your existing mobile app\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Website & Web Application Development",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "UI / UX Design",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  'Design is the soul of any digital product. '
+                                  'Our team designs intuitive, clean, and modern interfaces that engage users and communicate your brand identity.',
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "Our design process includes",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Wire-framing & prototyping\n"
+                                  " - Figma design & branding consistency\n"
+                                  " - Smooth animations & micro-interactions\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
                           ),
-                          buildText(
-                            "Deliver powerful web experiences that work everywhere. "
-                            "We create responsive web apps and business dashboards using Flutter Web — combining the performance of native with the flexibility of the web.",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(right: 10.w),
-                            isColorChanged: true,
-                            textColor: color,
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: VideoPlayer(_controller2)),
+                            ),
                           ),
-                          buildText(
-                            "We build",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Business management dashboards\n"
-                            " - Progressive Web Apps (PWAs)\n"
-                            " - Admin panels & portals\n"
-                            " - Web versions of your existing mobile app\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "UI / UX Design",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.asset('assets/images/services/api_backend.png')),
+                            ),
                           ),
-                          buildText(
-                            'Design is the soul of any digital product. '
-                            'Our team designs intuitive, clean, and modern interfaces that engage users and communicate your brand identity.',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: color,
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Backend & API Development",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  'A great app needs a powerful engine. '
+                                  'We build secure, scalable backend systems that ensure your apps run fast and stay reliable.',
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(right: 10.w),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "Tech Expertise",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Node.js / Firebase Cloud Functions\n"
+                                  " - REST API creation & integration\n"
+                                  " - Cloud database management\n"
+                                  " - Authentication & data security\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
                           ),
-                          buildText(
-                            "Our design process includes",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Wire-framing & prototyping\n"
-                            " - Figma design & branding consistency\n"
-                            " - Smooth animations & micro-interactions\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      child: Stack(children: [VideoPlayer(_controller2)]),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "App Maintenance & Support",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  'Technology evolves — and we help you stay ahead. '
+                                  'Our ongoing maintenance and support plans keep your apps up-to-date, optimized, and bug-free.',
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "Includes",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Version updates\n"
+                                  " - Performance optimization\n"
+                                  " - Feature enhancements\n"
+                                  " - Crash monitoring & fixes\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: VideoPlayer(_controller3)),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      //margin: EdgeInsets.only(left: 10.w),
-                      child: Image.asset('assets/images/services/api_backend.png'),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Backend & API Development",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.asset('assets/images/services/additional_service.png')),
+                            ),
                           ),
-                          buildText(
-                            'A great app needs a powerful engine. '
-                            'We build secure, scalable backend systems that ensure your apps run fast and stay reliable.',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(right: 10.w),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                          buildText(
-                            "Tech Expertise",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Node.js / Firebase Cloud Functions\n"
-                            " - REST API creation & integration\n"
-                            " - Cloud database management\n"
-                            " - Authentication & data security\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "App Maintenance & Support",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            'Technology evolves — and we help you stay ahead. '
-                            'Our ongoing maintenance and support plans keep your apps up-to-date, optimized, and bug-free.',
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                          buildText(
-                            "Includes",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Version updates\n"
-                            " - Performance optimization\n"
-                            " - Feature enhancements\n"
-                            " - Crash monitoring & fixes\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      child: Stack(children: [VideoPlayer(_controller3)]),
-                    ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      //margin: EdgeInsets.only(left: 10.w),
-                      child: Image.asset('assets/images/services/additional_service.png'),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Additional Services",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
-                          ),
+                        ),
 
-                          buildText(
-                            "To give your brand the full digital edge",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Additional Services",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+
+                                buildText(
+                                  "To give your brand the full digital edge",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(right: 10.w, top: 10.h, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - App Store & Play Store publishing\n"
+                                  " - App re-design and modernization\n"
+                                  " - Cross-platform migration (Native → Flutter)\n"
+                                  " - Startup MVP development & consulting\n"
+                                  " - Branding & digital presence setup\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
                           ),
-                          buildText(
-                            " - App Store & Play Store publishing\n"
-                            " - App re-design and modernization\n"
-                            " - Cross-platform migration (Native → Flutter)\n"
-                            " - Startup MVP development & consulting\n"
-                            " - Branding & digital presence setup\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Tech Stack",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  "We work with technologies that power modern experiences",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  " - Flutter\n"
+                                  " - Dart\n"
+                                  " - Firebase\n"
+                                  " - Node.js\n"
+                                  " - Firestore\n"
+                                  " - Git\n"
+                                  " - Figma\n"
+                                  " - REST API\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.asset('assets/images/services/tech_stack.png')),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: ClipRRect(borderRadius: BorderRadius.circular(10), child: Image.asset('assets/images/services/industries.png')),
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10.w),
+                            child: Column(
+                              children: [
+                                buildText(
+                                  "Industries We Serve",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.indigo.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " - Education & E-Learning\n"
+                                  " - E-Commerce & Retail\n"
+                                  " - Healthcare & Fitness\n"
+                                  " - Business Tools & Productivity\n"
+                                  " - Startups & MVPs\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                                buildText(
+                                  "Why Choose IT Info Partners",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: font,
+                                  //margin1: EdgeInsets.only(left: 10.w),
+                                  isColorChanged: true,
+                                  textColor: Colors.green.shade600,
+                                  isBoldRequired: true,
+                                ),
+                                buildText(
+                                  " 🚀 Flutter-first expertise — one codebase, multiple platforms\n"
+                                  " 🎨 Clean, modern, and user-focused design\n"
+                                  " 💼 Scalable, secure, and startup-friendly solutions\n"
+                                  " 🕓 Fast turnaround with transparent communication\n"
+                                  " 💡 Continuous innovation and reliable support\n",
+                                  Alignment.centerLeft,
+                                  isMarginRequired: true,
+                                  isSizeRequired: true,
+                                  fontSize: subFont,
+                                  maxLines: 5,
+                                  //margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
+                                  isColorChanged: true,
+                                  textColor: color,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 20.h),
+                    buildFooter(),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Tech Stack",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            "We work with technologies that power modern experiences",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                          buildText(
-                            " - Flutter\n"
-                            " - Dart\n"
-                            " - Firebase\n"
-                            " - Node.js\n"
-                            " - Firestore\n"
-                            " - Git\n"
-                            " - Figma\n"
-                            " - REST API\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(left: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: height, width: width, child: Image.asset('assets/images/services/tech_stack.png')),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: height,
-                      width: width,
-                      //margin: EdgeInsets.only(left: 10.w),
-                      child: Image.asset('assets/images/services/industries.png'),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(right: 10.w),
-                      width: width,
-                      child: Column(
-                        children: [
-                          buildText(
-                            "Industries We Serve",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.indigo.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " - Education & E-Learning\n"
-                            " - E-Commerce & Retail\n"
-                            " - Healthcare & Fitness\n"
-                            " - Business Tools & Productivity\n"
-                            " - Startups & MVPs\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            // margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                          buildText(
-                            "Why Choose IT Info Partners",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: font,
-                            //margin1: EdgeInsets.only(left: 10.w),
-                            isColorChanged: true,
-                            textColor: Colors.green.shade600,
-                            isBoldRequired: true,
-                          ),
-                          buildText(
-                            " 🚀 Flutter-first expertise — one codebase, multiple platforms\n"
-                            " 🎨 Clean, modern, and user-focused design\n"
-                            " 💼 Scalable, secure, and startup-friendly solutions\n"
-                            " 🕓 Fast turnaround with transparent communication\n"
-                            " 💡 Continuous innovation and reliable support\n",
-                            Alignment.centerLeft,
-                            isMarginRequired: true,
-                            isSizeRequired: true,
-                            fontSize: subFont,
-                            maxLines: 5,
-                            //margin1: EdgeInsets.only(right: 10.w, bottom: 10.h),
-                            isColorChanged: true,
-                            textColor: color,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 20.h),
-                buildFooter(),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

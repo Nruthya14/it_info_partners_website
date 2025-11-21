@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:vector_math/vector_math_64.dart' as vector;
 
-class HoverCard extends StatefulWidget {
+class ResponsiveHoverCard extends StatefulWidget {
   final Widget child;
-  final double width;
-  final double height;
   final Color color;
-
-  const HoverCard({super.key, required this.child, this.width = 0, this.height = 0, this.color = const Color(0xFFFFF3E0)});
+  final BoxConstraints? constraints;
+  const ResponsiveHoverCard({super.key, required this.child, this.color = const Color(0xFFFFF3E0), this.constraints});
 
   @override
-  State<HoverCard> createState() => _HoverCardState();
+  State<ResponsiveHoverCard> createState() => _ResponsiveHoverCardState();
 }
 
-class _HoverCardState extends State<HoverCard> {
+class _ResponsiveHoverCardState extends State<ResponsiveHoverCard> {
   bool _isHovered = false;
 
   @override
@@ -24,15 +23,17 @@ class _HoverCardState extends State<HoverCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeOut,
-        width: widget.width.w,
-        height: widget.height.h,
-        transform: _isHovered
-            ? (Matrix4.identity()..scale(1.05)) // slightly zoom in
-            : Matrix4.identity(),
+        constraints: widget.constraints,
+        padding: EdgeInsets.all(8.w),
+        transform: Matrix4.identity()
+          ..translateByVector3(vector.Vector3(0.0, _isHovered ? -5.0 : 0.0, 0.0))
+          ..scaleByVector3(vector.Vector3(_isHovered ? 1.05 : 1.0, _isHovered ? 1.05 : 1.0, 1.0)),
         decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/images/png/bg1.png'), fit: BoxFit.cover, colorFilter: const ColorFilter.mode(Colors.white54, BlendMode.srcATop)),
+          border: Border.all(width: 0.1),
+          borderRadius: BorderRadius.circular(16.r),
           color: widget.color,
-          borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [BoxShadow(color: _isHovered ? Colors.orange.withValues(alpha: 0.5) : Colors.black12, blurRadius: _isHovered ? 20 : 8, offset: const Offset(0, 6))],
+          boxShadow: [BoxShadow(color: _isHovered ? Colors.orange.withAlpha(128) : Colors.black12, blurRadius: _isHovered ? 20 : 8, offset: const Offset(0, 6))],
         ),
         child: widget.child,
       ),

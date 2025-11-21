@@ -122,7 +122,7 @@ Widget buildHeader() {
 
 Widget buildFooter() {
   double font = 0;
-  double spaceHeight = 0;
+  //double spaceHeight = 0;
 
   List<String> navItems = ['HOME', 'ABOUT', 'SERVICES', 'WORKSHOPS', 'CONTACT'];
   return LayoutBuilder(
@@ -131,11 +131,11 @@ Widget buildFooter() {
       } else {
         if (ScreenUtil().screenWidth > 600) {
           font = 4.sp;
-          spaceHeight = MediaQuery.of(context).size.height * 0.3;
+          //spaceHeight = MediaQuery.of(context).size.height * 0.3;
         }
         if (ScreenUtil().screenWidth <= 600) {
           font = 6.sp;
-          spaceHeight = 100.h;
+          //spaceHeight = MediaQuery.of(context).size.height * 0.15;
         }
       }
       return Container(
@@ -205,7 +205,7 @@ Widget buildFooter() {
                   children: [
                     buildText("MSME No: UDYAM-KR-22-0107284", Alignment.center, fontSize: font, isSizeRequired: true, isColorChanged: true, textColor: whiteSmoke),
                     buildText("GST No: 29AAKFI5345L1ZT", Alignment.center, fontSize: font, isSizeRequired: true, isColorChanged: true, textColor: whiteSmoke),
-                    SizedBox(height: spaceHeight, child: Image.asset('assets/images/png/logo.png')),
+                    //SizedBox(height: spaceHeight, child: Image.asset('assets/images/png/logo.png')),
                   ],
                 ),
               ],
@@ -324,26 +324,45 @@ class _HeaderState extends State<Header> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: imageHeight, child: Image.asset('assets/images/png/logo1.png')),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: fontHeight,
-                        width: imageWidth,
-                        child: AnimatedGradientText(), // your widget
-                      ),
-                      Text(
-                        'Inspire. Innovate. Impact.',
-                        style: GoogleFonts.adventPro(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
-                        //style: TextStyle(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              if (ScreenUtil().screenWidth > 600) ...[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: imageHeight, child: Image.asset('assets/images/png/logo1.png')),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: fontHeight,
+                          width: imageWidth,
+                          child: AnimatedGradientText(), // your widget
+                        ),
+                        Text(
+                          'Inspire. Innovate. Impact.',
+                          style: GoogleFonts.adventPro(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
+                          //style: TextStyle(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ] else ...[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: imageHeight, child: Image.asset('assets/images/png/logo1.png')),
+                    SizedBox(
+                      height: fontHeight,
+                      width: imageWidth,
+                      child: AnimatedGradientText(), // your widget
+                    ),
+                    Text(
+                      'Inspire. Innovate. Impact.',
+                      style: GoogleFonts.adventPro(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
+                      //style: TextStyle(fontSize: subFont, color: Colors.grey.shade300, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
