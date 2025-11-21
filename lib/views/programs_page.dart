@@ -66,6 +66,10 @@ class _ProgramsPageState extends State<ProgramsPage> {
                   font = 10.sp;
                   subFont = 6.sp;
                 }
+                if (ScreenUtil().screenWidth < 400) {
+                  font = 9.sp;
+                  subFont = 6.sp;
+                }
               }
 
               return SingleChildScrollView(

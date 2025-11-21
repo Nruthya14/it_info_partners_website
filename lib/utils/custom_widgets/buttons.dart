@@ -20,7 +20,7 @@ Widget buildButton(String text, void Function()? onPressed, {bool isDisabled = f
           margin = EdgeInsets.only(bottom: 20.h);
         } else if (ScreenUtil().screenWidth >= 600) {
           labelFontSize = 8.sp;
-          //padding = EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h);
+          padding = EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h);
           radius = 6;
           margin = EdgeInsets.only(bottom: 20.h);
         }

@@ -133,6 +133,10 @@ class _ServicesPageState extends State<ServicesPage> {
                   font = 9.sp;
                   subFont = 6.sp;
                 }
+                if (ScreenUtil().screenWidth < 400) {
+                  font = 9.sp;
+                  subFont = 6.sp;
+                }
               }
               return SingleChildScrollView(
                 child: Column(
